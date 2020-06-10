@@ -1,0 +1,40 @@
+{
+    "version": "3.9.5",
+
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+
+        "target": "es5",
+        "outDir": "./build",
+        "jsx": "react",
+
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+
+        "removeComments": false,
+        "preserveConstEnums": false,
+
+        "sourceMap": true,
+        "allowJs": true,
+        "pretty": true,
+
+        "noImplicitAny": false,
+        "skipLibCheck": true,
+        "strictNullChecks": false,
+        "downlevelIteration": true,
+
+        "baseUrl": "./",
+        "paths": {},
+        "lib": ["ES2018", "dom"]
+
+    },
+    "include": [
+        "./script/*.ts",
+        "./script/**/*.ts"
+    ],
+    "exclude": ["*.js", "*.json", "node_modules"]
+}
