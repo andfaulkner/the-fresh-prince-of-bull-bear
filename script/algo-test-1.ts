@@ -4,6 +4,10 @@ import path from "path";
 
 import { path as rootPath } from "app-root-path";
 
+// TODO get from env vars
+// e.g. "G5pYM3IB7oYBaGuY_vttXA5fd8Auh0P40"
+const token = "DUMMY_TOKEN";
+
 type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
 
 type QuestradeApi = ThenArg<ReturnType<typeof redeemToken>>["qtApi"];
@@ -15,7 +19,7 @@ const getAllStocks = async (offset: number) => {
 };
 
 const main = async () => {
-    const qt = await redeemToken("G5pYM3IB7oYBaGuY_vttXA5fd8Auh0P40");
+    const qt = await redeemToken(token);
 
     qtApi = qt.qtApi;
 
@@ -35,7 +39,10 @@ const main = async () => {
         currentStocks = await getAllStocks(counter);
     }
 
-    writeFileSync(path.join(rootPath, "data/all-stocks.json"), JSON.stringify(allStocks));
+    writeFileSync(
+        path.join(rootPath, "data/all-stocks.json"),
+        JSON.stringify(allStocks)
+    );
 
     console.log(`\n\n\n`);
     console.log(`allStocks:`, allStocks);
