@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@types/node": "^10.14.16",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
   }
 }
