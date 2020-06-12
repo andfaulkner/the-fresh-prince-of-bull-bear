@@ -1,16 +1,16 @@
+/// <reference path="../typings/index.d.ts" />
+
 /*------------------------------------- THIRD-PARTY MODULES --------------------------------------*/
 import path from 'path';
 import {writeFileSync} from 'fs';
+// Reference to root path of project
 import {path as rootPath} from 'app-root-path';
-
 import {redeemToken} from 'questrade-ts';
 
 /*--------------------------------------- TYPE DEFINITIONS ---------------------------------------*/
-type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
+type QuestradeApi = UnpackPromise<ReturnType<typeof redeemToken>>['qtApi'];
 
-type QuestradeApi = ThenArg<ReturnType<typeof redeemToken>>['qtApi'];
-
-type AllStocks = ThenArg<ReturnType<QuestradeApi['search']['allStocks']>>;
+type AllStocks = UnpackPromise<ReturnType<QuestradeApi['search']['allStocks']>>;
 
 /*-------------------------------------------- CONFIG --------------------------------------------*/
 // TODO get from env vars
