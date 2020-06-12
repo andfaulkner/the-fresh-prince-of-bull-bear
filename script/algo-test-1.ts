@@ -11,16 +11,20 @@ import {redeemToken} from 'questrade-ts';
 import {config as envConfig} from 'dotenv';
 envConfig({path: path.join(rootPath, `./config/env/.env`)});
 
+/**
+ * Allows access to the Questrade API
+ * Note: must be updated in .env file every few days.
+ *
+ * e.g. "G5pYM3IB7oYBaGuY_vttXA5fd8Auh0P40"
+ */
+const questradeApiToken = process.env['QUESTRADE_API_TOKEN'];
+
 /*--------------------------------------- TYPE DEFINITIONS ---------------------------------------*/
 type QuestradeApi = UnpackPromise<ReturnType<typeof redeemToken>>['qtApi'];
 
 type AllStocks = UnpackPromise<ReturnType<QuestradeApi['search']['allStocks']>>;
 
 /*-------------------------------------------- CONFIG --------------------------------------------*/
-// TODO get from env vars
-// e.g. "G5pYM3IB7oYBaGuY_vttXA5fd8Auh0P40"
-const token = 'DUMMY_TOKEN';
-
 const numStocks = 100;
 
 let qtApi: QuestradeApi;
@@ -67,7 +71,7 @@ const getAllMarkets = async () => {
  */
 const main = async () => {
     // Return and globally store QT API connection
-    const qt = await redeemToken(token);
+    const qt = await redeemToken(questradeApiToken);
     qtApi = qt.qtApi;
     console.log(`qtApi:`, qtApi);
 
