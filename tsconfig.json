@@ -29,12 +29,14 @@
 
         "baseUrl": "./",
         "paths": {},
+        "typeRoots": ["../typings"],
         "lib": ["ES2018", "dom"]
 
     },
     "include": [
         "./script/*.ts",
-        "./script/**/*.ts"
+        "./script/**/*.ts",
+        "./typings/index.d.ts"
     ],
     "exclude": ["*.js", "*.json", "node_modules"]
 }
