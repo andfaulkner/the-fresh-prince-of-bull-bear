@@ -7,6 +7,10 @@ import {writeFileSync} from 'fs';
 import {path as rootPath} from 'app-root-path';
 import {redeemToken} from 'questrade-ts';
 
+/*-------------------------------------------- CONFIG --------------------------------------------*/
+import {config as envConfig} from 'dotenv';
+envConfig({path: path.join(rootPath, `./config/env/.env`)});
+
 /*--------------------------------------- TYPE DEFINITIONS ---------------------------------------*/
 type QuestradeApi = UnpackPromise<ReturnType<typeof redeemToken>>['qtApi'];
 
