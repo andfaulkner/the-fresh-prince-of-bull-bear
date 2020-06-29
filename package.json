@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build-server": "tsc -p ./tsconfig.json",
-    "run": "node --max_old_space_size=2048 ./build/algo-test-1.js",
-    "watch-run": "nodemon --delay 1 --watch ./build/ --exec 'node --max_old_space_size=2048 ./build/algo-test-1.js'",
+    "run": "node --max_old_space_size=2048 ./build/main/algo-test-1.js",
+    "watch-run": "nodemon --delay 1 --watch ./build/ --exec 'node --max_old_space_size=2048 ./build/main/algo-test-1.js'",
     "watch-server": "nodemon --watch ./app/server --watch ./script --watch ./typings --ext ts,tsx,json --exec 'npm run build-server'"
   },
   "repository": {
@@ -18,6 +18,7 @@
   "dependencies": {
     "app-root-path": "^3.0.0",
     "dotenv": "^8.2.0",
+    "mad-logs": "^11.4.0",
     "questrade-ts": "^1.0.2",
     "typescript": "^3.9.5"
   },
