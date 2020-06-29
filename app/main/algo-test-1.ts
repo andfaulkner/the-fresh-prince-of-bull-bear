@@ -1,4 +1,5 @@
-/// <reference path="../typings/index.d.ts" />
+/// <reference path="../../typings/index.d.ts" />
+/// <reference path="./typings/vendor.d.ts" />
 
 /*------------------------------------- THIRD-PARTY MODULES --------------------------------------*/
 import path from 'path';
@@ -6,6 +7,10 @@ import {writeFileSync} from 'fs';
 // Reference to root path of project
 import {path as rootPath} from 'app-root-path';
 import {redeemToken} from 'questrade-ts';
+
+/*------------------------------------------- LOGGING --------------------------------------------*/
+import {logFactory, Styles} from 'mad-logs/lib/shared';
+const log = logFactory(__filename.replace(`${__dirname}/`, ``), Styles.cantTouch);
 
 /*-------------------------------------------- CONFIG --------------------------------------------*/
 import {config as envConfig} from 'dotenv';
@@ -70,15 +75,20 @@ const getAllMarkets = async () => {
  * Main application code - talk to Questrade, get data (TEMP)
  */
 const main = async () => {
+    log.info(``);
     // Return and globally store QT API connection
-    const qt = await redeemToken(questradeApiToken);
+    const qt = await redeemToken(questradeApiToken).catch(err => {
+        log.error(`[ERROR] Redeem API token failed:`, err);
+        throw err;
+    });
+
     qtApi = qt.qtApi;
     console.log(`qtApi:`, qtApi);
 
-    const allMarkets = getAllMarkets();
+    const allMarkets = await getAllMarkets();
 
     // Grab NASDAQ stocks list, but limit the number returned
-    const nasdaqStocks = getAllNASDAQStocks();
+    const nasdaqStocks = await getAllNASDAQStocks();
 
     // Write all returned stocks into a data file
     writeFileSync(path.join(rootPath, 'data/nasdaq-stocks.json'), JSON.stringify(nasdaqStocks));

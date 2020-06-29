@@ -1,0 +1,13 @@
+{
+    "extends": "../../config/tsconfig-base.json",
+
+    "compilerOptions": {
+        "lib": ["ES2018", "dom"]
+    },
+    "include": [
+        "./*.ts",
+        "./**/*.ts",
+        "../../typings/index.d.ts"
+    ],
+    "exclude": ["*.js", "*.json", "node_modules"]
+}
